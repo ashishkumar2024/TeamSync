@@ -1,0 +1,45 @@
+openapi: 3.0.3
+info:
+  title: TeamSync API
+  version: 1.0.0
+servers:
+  - url: http://localhost:4000/api/v1
+paths:
+  /auth/login:
+    post:
+      summary: Login with email and password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Authenticated
+  /auth/register:
+    post:
+      summary: Register a new user
+      responses:
+        '200':
+          description: Registered
+  /tasks:
+    get:
+      summary: List tasks
+      parameters:
+        - in: query
+          name: organizationId
+          required: true
+          schema:
+            type: string
+    post:
+      summary: Create task
+  /notifications:
+    get:
+      summary: List notifications
+
