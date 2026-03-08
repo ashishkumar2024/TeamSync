@@ -29,5 +29,5 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY prisma ./prisma
 
-CMD ["node", "dist/worker/notificationWorker.js"]
+CMD ["node", "dist/src/worker/notificationWorker.js"]
 
