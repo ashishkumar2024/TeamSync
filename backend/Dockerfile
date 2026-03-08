@@ -31,5 +31,5 @@ COPY prisma ./prisma
 
 EXPOSE 4000
 
-CMD ["sh", "-lc", "npx prisma migrate deploy && node dist/index.js"]
+CMD ["sh", "-lc", "npx prisma migrate deploy && node dist/src/index.js"]
 
