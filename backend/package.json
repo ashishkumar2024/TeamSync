@@ -11,7 +11,7 @@
     "worker": "node dist/worker/notificationWorker.js",
     "worker:dev": "ts-node-dev --respawn --transpile-only src/worker/notificationWorker.ts",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "test": "jest",
+    "test": "node ./node_modules/jest/bin/jest.js",
     "prisma:migrate": "prisma migrate dev",
     "prisma:generate": "prisma generate",
     "prisma:seed": "ts-node prisma/seed.ts"
