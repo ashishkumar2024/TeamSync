@@ -34,8 +34,36 @@ notificationRouter.get('/', async (req: AuthenticatedRequest, res) => {
     }),
   ]);
 
+  // Enrich notifications with task and project data
+  const enrichedItems = await Promise.all(
+    items.map(async (notification) => {
+      let taskName = null;
+      let projectName = null;
+      
+      if (notification.data && typeof notification.data === 'object') {
+        const data = notification.data as any;
+        if (data.taskId) {
+          const task = await prisma.task.findUnique({
+            where: { id: data.taskId },
+            include: { project: true }
+          });
+          if (task) {
+            taskName = task.title;
+            projectName = task.project.name;
+          }
+        }
+      }
+      
+      return {
+        ...notification,
+        taskName,
+        projectName
+      };
+    })
+  );
+
   res.json({
-    items,
+    items: enrichedItems,
     page: pageNum,
     pageSize: pageSizeNum,
     total,
